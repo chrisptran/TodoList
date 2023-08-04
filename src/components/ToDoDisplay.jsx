@@ -8,6 +8,11 @@ const ToDoDisplay = (props) => {
         listToUpdate[i].checked = e.target.checked
         props.onUpdate(listToUpdate)
     }
+
+    const handleDelete = (deleteIdx) => {
+        const filteredList = props.todos.filter((eachTodo, i) => i !== deleteIdx)
+        props.onUpdate(filteredList)
+    }
     return (
         <div>
             <h1>To Do List</h1>
@@ -19,6 +24,7 @@ const ToDoDisplay = (props) => {
                             textDecoration: eachTodo.checked ? 'line-through' : 'none'
                         }}
                         >{eachTodo.list}<input type='checkbox' checked={eachTodo.checked || false} onChange={(e) => handleUpdate(e, i)}  /></li>
+                    <button onClick={(e) => handleDelete(i)} >Delete</button>
                     </ul>
                 ))
             }
